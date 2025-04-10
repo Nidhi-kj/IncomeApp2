@@ -75,6 +75,7 @@
 		D0C811B92DA6CF2E00680B56 = {
 			isa = PBXGroup;
 			children = (
+				D0C811FB2DA7C3B600680B56 /* Views */,
 				D0C811C42DA6CF2E00680B56 /* IncomeApp2 */,
 				D0C811D52DA6CF2F00680B56 /* IncomeApp2Tests */,
 				D0C811DF2DA6CF2F00680B56 /* IncomeApp2UITests */,
@@ -90,6 +91,13 @@
 				D0C811DC2DA6CF2F00680B56 /* IncomeApp2UITests.xctest */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		D0C811FB2DA7C3B600680B56 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Views;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
