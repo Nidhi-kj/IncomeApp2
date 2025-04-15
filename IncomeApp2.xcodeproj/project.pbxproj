@@ -29,6 +29,25 @@
 		D0C811DC2DA6CF2F00680B56 /* IncomeApp2UITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = IncomeApp2UITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
+/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		D0C812022DAE505400680B56 /* Exceptions for "IncomeApp2Tests" folder in "IncomeApp2" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Assets.xcassets,
+				"Preview Assets.xcassets",
+			);
+			target = D0C811C12DA6CF2E00680B56 /* IncomeApp2 */;
+		};
+		D0C812032DAE505400680B56 /* Exceptions for "IncomeApp2Tests" folder in "IncomeApp2Tests" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Assets.xcassets,
+				"Preview Assets.xcassets",
+			);
+			target = D0C811D12DA6CF2F00680B56 /* IncomeApp2Tests */;
+		};
+/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
+
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		D0C811C42DA6CF2E00680B56 /* IncomeApp2 */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
@@ -37,6 +56,10 @@
 		};
 		D0C811D52DA6CF2F00680B56 /* IncomeApp2Tests */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				D0C812022DAE505400680B56 /* Exceptions for "IncomeApp2Tests" folder in "IncomeApp2" target */,
+				D0C812032DAE505400680B56 /* Exceptions for "IncomeApp2Tests" folder in "IncomeApp2Tests" target */,
+			);
 			path = IncomeApp2Tests;
 			sourceTree = "<group>";
 		};

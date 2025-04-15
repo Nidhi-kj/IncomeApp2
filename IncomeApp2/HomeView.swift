@@ -12,62 +12,96 @@ struct HomeView: View {
         Transaction(title: "Apple", type: .expense, amount: 500, date:Date()),
         Transaction(title: "Apple", type: .expense, amount: 500, date:Date())
         
-        ]
+    ]
+    
+    fileprivate func FloatingButton() -> some View {
+        VStack{
+            Spacer()
+            NavigationLink {
+                AddTransactionView()
+            } label:{
+                Text("+")
+                    .font(.largeTitle)
+                    .frame(width: 80, height: 80)
+                    .foregroundStyle(Color.white)
+            }
+            .background(Color.purple)
+            .clipShape(Rectangle())
+        }
+        
+    }
+    fileprivate func BalanceView() -> some View {
+        ZStack{
+            RoundedRectangle(cornerRadius: 8)
+                .fill(Color.primaryLightGreen)
+            
+            
+            VStack(alignment: .leading,spacing: 8){
+                HStack{
+                    VStack{
+                        
+                        Text("Balance")
+                        // .font(.caption)
+                            .font(.system(size: 20,weight: .bold))
+                            .foregroundStyle(Color.white)
+                        Text(" ₹600")
+                            .font(.system(size: 45,weight: .light))
+                            .foregroundStyle(Color.white)
+                    }
+                    Spacer()
+                }
+                .padding(.top)
+                
+                HStack(spacing:30){
+                    VStack(alignment: .leading){
+                        Text("Expenses")
+                            .font(.system(size: 15,weight: .semibold))
+                            .foregroundStyle(Color.white)
+                        Text("₹200")
+                            .font(.system(size: 15,weight: .regular))
+                            .foregroundStyle(Color.white)
+                    }
+                    VStack(alignment: .leading){
+                        Text("Income")
+                            .font(.system(size: 15,weight: .semibold))
+                            .foregroundStyle(Color.white)
+                        Text("₹200")
+                            .font(.system(size: 15,weight: .regular))
+                            .foregroundStyle(Color.white)
+                    }
+                }
+                Spacer()
+            }
+            .padding(.horizontal)
+        }
+        .shadow(color: .black.opacity(0.3), radius: 10, x: 0, y: 5)
+        .frame(height: 150)
+        .padding(.horizontal)
+    }
     
     var body: some View {
-        VStack {
-            List{
-                ForEach(transactions) { transaction  in
-                    TransactionView(transaction: transaction)
+        NavigationStack {
+            ZStack {
+                VStack {
+                    BalanceView()
+                    List{
+                        ForEach(transactions) { transaction  in
+                            TransactionView(transaction: transaction)
+                        }
+                    }
+                    .scrollContentBackground(.hidden)
                 }
+                
+                FloatingButton()
             }
-            .scrollContentBackground(.hidden)
+            .navigationTitle("Income")
+            .toolbar{
+                ToolbarItem(placement: .topBarLeading, content: <#T##() -> View#>)
+            }
         }
     }
 }
-
 #Preview {
   HomeView()
 }
 
-struct TransactionView: View {
-    let transaction:  Transaction
-    var body: some View {
-        VStack {
-            HStack{
-                Spacer()
-                //Text("\(transaction.date)")
-                Text(transaction.displayDate)
-                    .font(.system(size: 16))
-                Spacer()
-            }
-            .padding(.vertical, 5)
-            .background(Color.lightGrayShade.opacity(0.6))
-            .clipShape(RoundedRectangle(cornerRadius: 5))
-            
-            HStack{
-                Image(systemName: transaction.type == .income ? "arrow.up.forward" :  "arrow.down.forward")
-                    .font(.system(size: 20, weight : .bold))
-                    .foregroundStyle(transaction.type == .income ? Color.green : Color.red)
-                
-                
-                VStack(alignment: .leading,spacing: 10) {
-                    HStack{
-                        
-                        Text(transaction.title)
-                            .font(.system(size: 20, weight: .bold))
-                        Spacer()
-                        
-                        Text(String(transaction.displayAmount))
-                            .font(.system(size: 20,weight: .bold))
-                    }
-                    Text("completed")
-                        .font(.system(size: 15,weight: .bold))
-                    
-                }
-            }
-        }
-        // Text(transaction.title)
-        .listRowSeparator(.hidden)
-    }
-}
