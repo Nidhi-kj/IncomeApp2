@@ -6,11 +6,11 @@
 //
 
 import Foundation
-struct Transaction: Identifiable{
+struct Transaction: Identifiable,Hashable{
     
     let id = UUID()
     let title: String
-    let type: TranactionType
+    let type: TransactionType
     let amount: Double
     let date: Date
     var displayDate: String {
@@ -27,3 +27,8 @@ struct Transaction: Identifiable{
     }
     
 }
+//extension Transaction: Hashable {
+//    func hash(into hasher: inout Hasher) {
+//        hasher.combine(id)
+//    }
+//}

@@ -13,12 +13,13 @@ struct HomeView: View {
         Transaction(title: "Apple", type: .expense, amount: 500, date:Date())
         
     ]
-    
+    @State private var showAddTransactionView = false
+    @State private var transactionToEdit: Transaction?
     fileprivate func FloatingButton() -> some View {
         VStack{
             Spacer()
             NavigationLink {
-                AddTransactionView()
+                AddTransactionView(transactions: $transactions)
             } label:{
                 Text("+")
                     .font(.largeTitle)
@@ -86,7 +87,15 @@ struct HomeView: View {
                     BalanceView()
                     List{
                         ForEach(transactions) { transaction  in
-                            TransactionView(transaction: transaction)
+                            Button(action: {
+                                //showAddTransactionView = true
+                                transactionToEdit = transaction
+                            },label: {
+                                
+                                TransactionView(transaction: transaction)
+                                    .foregroundStyle(.black)
+                            })
+                            
                         }
                     }
                     .scrollContentBackground(.hidden)
@@ -95,8 +104,22 @@ struct HomeView: View {
                 FloatingButton()
             }
             .navigationTitle("Income")
+            .navigationDestination(item: $transactionToEdit,
+                                   destination: {  transactionToEdit in
+                AddTransactionView(transactions: $transactions,   transactionToEdit: transactionToEdit)
+            })
+            .navigationDestination(isPresented: $showAddTransactionView, destination: {
+                AddTransactionView(transactions: $transactions)
+            })
             .toolbar{
-                ToolbarItem(placement: .topBarLeading, content: <#T##() -> View#>)
+                ToolbarItem(placement: .topBarTrailing){
+                    Button(action: {
+                        
+                    }, label: {
+                        Image(systemName: "gearshape.fill")
+                            .foregroundStyle(Color.purple)
+                    })
+                }
             }
         }
     }
