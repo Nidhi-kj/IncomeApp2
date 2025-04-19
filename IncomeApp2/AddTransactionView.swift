@@ -16,6 +16,8 @@ struct AddTransactionView: View{
     @State private var alertTitle = ""
     @State private var alertMessage = ""
     @State private var showAlert = false
+	
+	// input
     @Binding var transactions : [Transaction]
     var transactionToEdit : Transaction?
     
@@ -40,8 +42,6 @@ struct AddTransactionView: View{
                 .frame(height: 0.5)
                 .padding(.horizontal, 30)
             Picker("chosse type", selection: $selectedTransactionType) {
-//                Text("Income")
-//                Text("Expense")
                 ForEach(TransactionType.allCases) {transactionType in
                     Text(transactionType.title)
                         .tag(transactionType)
@@ -62,21 +62,15 @@ struct AddTransactionView: View{
                 }
                 let transaction = Transaction(title: transactionTitle, type: selectedTransactionType, amount: amount, date: Date())
                 
-              //  let index = transactions.firstIndex {transaction in
-               //     self.transactionToEdit?.id == transaction.id
-                    
-              //  }
-                if let transactionToEdit = transactionToEdit
-                   //let index  = transactions.firstIndex(of: transactionToEdit)
-                {
-                    guard  let indexOfTransaction  = transactions.firstIndex(of: transactionToEdit) else
-                    {
+                if let transactionToEditUnwrap = transactionToEdit {
+                    guard  let index  = transactions.firstIndex(of: transactionToEditUnwrap) else {
                         alertTitle = "something went wrong "
                         alertMessage = "cannot update this transaction right now "
                         showAlert = true
                         return
                     }
-                    transactions[indexOfTransaction] = transaction
+					
+                    transactions[index] = transaction
                     
                 } else {
                     transactions.append(transaction)

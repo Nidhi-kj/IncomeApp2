@@ -15,6 +15,7 @@ struct HomeView: View {
     ]
     @State private var showAddTransactionView = false
     @State private var transactionToEdit: Transaction?
+	
     fileprivate func FloatingButton() -> some View {
         VStack{
             Spacer()
@@ -100,14 +101,17 @@ struct HomeView: View {
                     }
                     .scrollContentBackground(.hidden)
                 }
+				.padding(.bottom, 100)
                 
                 FloatingButton()
             }
             .navigationTitle("Income")
+			// edit
             .navigationDestination(item: $transactionToEdit,
                                    destination: {  transactionToEdit in
                 AddTransactionView(transactions: $transactions,   transactionToEdit: transactionToEdit)
             })
+			// create
             .navigationDestination(isPresented: $showAddTransactionView, destination: {
                 AddTransactionView(transactions: $transactions)
             })
